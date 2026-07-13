@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nohaila El-Attary — Ingénieure Logicielle Full-Stack</title>
+<meta name="description" content="Portfolio de Nohaila El-Attary, Ingénieure Logicielle Full-Stack — React.js, Node.js, .NET. Plateforme éducative touchant plus de 500 000 élèves au Maroc.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A1220;
+    --bg-alt:#0F1B30;
+    --card:#12213A;
+    --card-hover:#162a49;
+    --border:#223255;
+    --text:#EAEFF7;
+    --text-muted:#8CA0C4;
+    --text-dim:#5E7096;
+    --accent:#3457D1;      /* bleu majorelle */
+    --accent-light:#6C87F0;
+    --teal:#48D3C4;        /* zellige turquoise */
+    --gold:#E0AA45;        /* touche chaude, usage rare */
+    --danger:#E0645A;
+    --radius:14px;
+    --maxw:1100px;
+    --transition: .35s cubic-bezier(.4,0,.2,1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', system-ui, sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(52,87,209,.18), transparent 45%),
+      radial-gradient(circle at 85% 0%, rgba(72,211,196,.10), transparent 40%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  img,svg{display:block; max-width:100%;}
+
+  :focus-visible{
+    outline:2px solid var(--teal);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  h1,h2,h3,h4{font-family:'Space Grotesk', sans-serif; letter-spacing:-.01em; font-weight:700;}
+
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+  section{padding:96px 0;}
+  @media (max-width:768px){ section{padding:64px 0;} }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:.78rem;
+    color:var(--teal);
+    letter-spacing:.06em;
+    display:flex; align-items:center; gap:8px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{content:"//"; color:var(--text-dim);}
+
+  h2.section-title{
+    font-size:clamp(1.6rem, 3vw, 2.3rem);
+    margin-bottom:40px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,18,32,.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav{
+    max-width:var(--maxw); margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:1.15rem;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{color:var(--teal);}
+  .nav-links{display:flex; gap:28px; font-size:.92rem; color:var(--text-muted);}
+  .nav-links a{transition:color var(--transition);}
+  .nav-links a:hover{color:var(--text);}
+  .nav-toggle{
+    display:none; background:none; border:1px solid var(--border); border-radius:8px;
+    width:40px; height:40px; color:var(--text); font-size:1.2rem; cursor:pointer;
+  }
+  @media (max-width:768px){
+    .nav-links{
+      position:fixed; top:64px; left:0; right:0;
+      background:var(--bg-alt); border-bottom:1px solid var(--border);
+      flex-direction:column; padding:20px 24px; gap:16px;
+      transform:translateY(-120%); opacity:0;
+      transition:transform var(--transition), opacity var(--transition);
+    }
+    .nav-links.open{transform:translateY(0); opacity:1;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{padding:80px 0 60px;}
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center;
+  }
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+
+  .hero h1{font-size:clamp(2.3rem, 5vw, 3.4rem); line-height:1.05; margin-bottom:14px;}
+  .hero h1 span{color:var(--teal);}
+  .hero .role{
+    font-family:'JetBrains Mono', monospace; color:var(--accent-light); font-size:1.05rem; margin-bottom:20px;
+  }
+  .hero p.lead{color:var(--text-muted); font-size:1.02rem; max-width:46ch; margin-bottom:32px;}
+
+  .cta-row{display:flex; flex-wrap:wrap; gap:12px;}
+  .btn{
+    font-family:'Inter', sans-serif; font-weight:600; font-size:.92rem;
+    padding:13px 22px; border-radius:10px; display:inline-flex; align-items:center; gap:8px;
+    transition:transform var(--transition), background var(--transition), border-color var(--transition);
+    border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--accent); color:#fff;}
+  .btn-primary:hover{background:var(--accent-light); transform:translateY(-2px);}
+  .btn-ghost{border-color:var(--border); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--teal); color:var(--teal); transform:translateY(-2px);}
+
+  /* Terminal */
+  .terminal{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+    overflow:hidden; box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px; padding:12px 16px;
+    background:var(--bg-alt); border-bottom:1px solid var(--border);
+  }
+  .terminal-bar .tdot{width:11px; height:11px; border-radius:50%;}
+  .tdot.r{background:var(--danger);} .tdot.y{background:var(--gold);} .tdot.g{background:var(--teal);}
+  .terminal-title{margin-left:8px; font-family:'JetBrains Mono',monospace; font-size:.78rem; color:var(--text-dim);}
+  .terminal-body{
+    padding:16px; height:230px; overflow-y:auto; font-family:'JetBrains Mono', monospace; font-size:.84rem;
+  }
+  .terminal-body::-webkit-scrollbar{width:6px;}
+  .terminal-body::-webkit-scrollbar-thumb{background:var(--border); border-radius:4px;}
+  .term-line{margin-bottom:6px; white-space:pre-wrap; word-break:break-word; color:var(--text-muted);}
+  .term-line .prompt{color:var(--teal); margin-right:6px;}
+  .term-line.out{color:var(--text);}
+  .term-line.err{color:var(--danger);}
+  .terminal-input-row{
+    display:flex; align-items:center; gap:8px; padding:10px 16px;
+    border-top:1px solid var(--border); font-family:'JetBrains Mono',monospace; font-size:.84rem;
+  }
+  .terminal-input-row .prompt{color:var(--teal);}
+  .terminal-input-row input{
+    flex:1; background:none; border:none; outline:none; color:var(--text); font-family:inherit; font-size:.84rem;
+  }
+  .terminal-chips{display:flex; flex-wrap:wrap; gap:8px; padding:0 16px 16px;}
+  .terminal-chips button{
+    font-family:'JetBrains Mono', monospace; font-size:.72rem; color:var(--text-muted);
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:20px; padding:6px 12px; cursor:pointer;
+    transition:all var(--transition);
+  }
+  .terminal-chips button:hover{color:var(--teal); border-color:var(--teal);}
+
+  /* ---------- STATS ---------- */
+  .stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--border); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden;
+  }
+  @media (max-width:700px){ .stats{grid-template-columns:repeat(2,1fr);} }
+  .stat{background:var(--card); padding:28px 20px; text-align:center;}
+  .stat-number{
+    font-family:'Space Grotesk', sans-serif; font-size:clamp(1.6rem,3vw,2.2rem); font-weight:700; color:var(--teal);
+  }
+  .stat-label{font-size:.8rem; color:var(--text-muted); margin-top:6px;}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in-view{opacity:1; transform:none;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:48px;}
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid p{color:var(--text-muted); margin-bottom:16px;}
+  .facts{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:24px;}
+  .facts li{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:.9rem;}
+  .facts li:last-child{border-bottom:none;}
+  .facts li span:first-child{color:var(--text-dim);}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative; padding-left:28px; border-left:2px solid var(--border);}
+  .tl-item{position:relative; margin-bottom:44px;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; left:-34px; top:4px; width:12px; height:12px; border-radius:50%;
+    background:var(--teal); box-shadow:0 0 0 4px rgba(72,211,196,.18);
+  }
+  .tl-period{font-family:'JetBrains Mono', monospace; font-size:.78rem; color:var(--accent-light); margin-bottom:6px;}
+  .tl-role{font-size:1.1rem; font-weight:700; font-family:'Space Grotesk',sans-serif;}
+  .tl-org{color:var(--text-muted); font-size:.9rem; margin-bottom:12px;}
+  .tl-item ul{margin-top:8px;}
+  .tl-item ul li{position:relative; padding-left:18px; color:var(--text-muted); font-size:.92rem; margin-bottom:6px;}
+  .tl-item ul li::before{content:"▸"; position:absolute; left:0; color:var(--teal);}
+
+  /* ---------- PROJECTS ---------- */
+  .filters{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:32px;}
+  .filter-btn{
+    font-family:'JetBrains Mono', monospace; font-size:.78rem; padding:8px 16px; border-radius:20px;
+    border:1px solid var(--border); background:transparent; color:var(--text-muted); cursor:pointer;
+    transition:all var(--transition);
+  }
+  .filter-btn.active, .filter-btn:hover{background:var(--accent); color:#fff; border-color:var(--accent);}
+
+  .projects-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:24px;}
+  @media (max-width:800px){ .projects-grid{grid-template-columns:1fr;} }
+
+  .project-card{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden;
+    transition:transform var(--transition), border-color var(--transition), opacity var(--transition);
+  }
+  .project-card:hover{transform:translateY(-4px); border-color:var(--accent-light);}
+  .project-card.hidden{display:none;}
+  .project-visual{
+    height:150px; position:relative; background:
+      linear-gradient(135deg, rgba(52,87,209,.25), rgba(72,211,196,.12));
+    border-bottom:1px solid var(--border);
+  }
+  .project-visual svg{width:100%; height:100%;}
+  .project-badge{
+    position:absolute; top:12px; right:12px; font-family:'JetBrains Mono',monospace; font-size:.68rem;
+    background:rgba(10,18,32,.75); border:1px solid var(--border); padding:4px 10px; border-radius:20px; color:var(--gold);
+  }
+  .project-body{padding:22px;}
+  .project-body h3{font-size:1.08rem; margin-bottom:8px;}
+  .project-body p{color:var(--text-muted); font-size:.88rem; margin-bottom:14px;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;}
+  .tag{
+    font-family:'JetBrains Mono', monospace; font-size:.68rem; color:var(--teal);
+    background:rgba(72,211,196,.08); border:1px solid rgba(72,211,196,.25); padding:3px 9px; border-radius:6px;
+  }
+  .project-links{display:flex; gap:16px; font-size:.82rem;}
+  .project-links a{color:var(--accent-light); border-bottom:1px solid transparent; transition:border-color var(--transition);}
+  .project-links a:hover{border-color:var(--accent-light);}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:28px;}
+  @media (max-width:700px){ .skills-grid{grid-template-columns:1fr;} }
+  .skill-cat{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:22px;}
+  .skill-cat h4{font-family:'JetBrains Mono',monospace; font-size:.8rem; color:var(--gold); margin-bottom:14px; text-transform:uppercase; letter-spacing:.05em;}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-size:.82rem; background:var(--bg-alt); border:1px solid var(--border); padding:6px 12px; border-radius:8px;
+    opacity:0; transform:scale(.9); transition:opacity .4s ease, transform .4s ease, border-color .3s;
+  }
+  .chip.in-view{opacity:1; transform:scale(1);}
+  .chip:hover{border-color:var(--teal);}
+
+  /* ---------- TWO COL: formation / certifs ---------- */
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  @media (max-width:800px){ .two-col{grid-template-columns:1fr;} }
+  .simple-list li{
+    padding:14px 0; border-bottom:1px solid var(--border); font-size:.92rem;
+  }
+  .simple-list li:last-child{border-bottom:none;}
+  .simple-list .item-title{font-weight:600;}
+  .simple-list .item-sub{color:var(--text-dim); font-size:.82rem; margin-top:2px;}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{border-top:1px solid var(--border); padding:70px 0 30px; text-align:center;}
+  footer h2{font-size:clamp(1.6rem,3.5vw,2.4rem); margin-bottom:14px;}
+  footer p.lead{color:var(--text-muted); margin-bottom:34px;}
+  .contact-row{display:flex; justify-content:center; flex-wrap:wrap; gap:14px; margin-bottom:50px;}
+  .copy-toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--teal); color:#06231F; font-weight:600; font-size:.85rem;
+    padding:10px 20px; border-radius:30px; opacity:0; pointer-events:none;
+    transition:opacity .3s ease, transform .3s ease; z-index:100;
+  }
+  .copy-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+  .foot-links{display:flex; justify-content:center; gap:22px; font-size:.85rem; color:var(--text-dim); margin-bottom:18px;}
+  .foot-links a:hover{color:var(--teal);}
+  .copyright{font-size:.78rem; color:var(--text-dim); font-family:'JetBrains Mono',monospace;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">Nohaila<span class="dot">.</span>EA</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#experience">Expérience</a></li>
+      <li><a href="#projects">Projets</a></li>
+      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">☰</button>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">ingénieure logicielle · full-stack</p>
+        <h1>Nohaila <span>El-Attary</span></h1>
+        <p class="role">React.js · Node.js · .NET (C#) · Supabase</p>
+        <p class="lead">Jeune diplômée en Ingénierie Logicielle, je conçois et développe des applications web de bout en bout — de l'analyse fonctionnelle au déploiement. Mon stage de fin d'études a porté sur une plateforme de gestion des appels d'offres utilisée en production ; mon premier projet, une série de jeux éducatifs, a été déployé sur la plateforme nationale Massar et touche plus de 500&nbsp;000 élèves au Maroc.</p>
+        <div class="cta-row">
+          <a href="mailto:elattarynohaila@gmail.com" class="btn btn-primary">Me contacter</a>
+          <a href="https://github.com/elattarynoha" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+          <a href="https://linkedin.com/in/nohaila-el-attary" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="terminal" id="terminal">
+        <div class="terminal-bar">
+          <span class="tdot r"></span><span class="tdot y"></span><span class="tdot g"></span>
+          <span class="terminal-title">nohaila@portfolio:~</span>
+        </div>
+        <div class="terminal-body" id="terminalBody"></div>
+        <div class="terminal-input-row">
+          <span class="prompt">$</span>
+          <input type="text" id="terminalInput" placeholder="tape 'help' puis Entrée" autocomplete="off" aria-label="Terminal interactif">
+        </div>
+        <div class="terminal-chips">
+          <button data-cmd="whoami">whoami</button>
+          <button data-cmd="experience">experience</button>
+          <button data-cmd="projets">projets</button>
+          <button data-cmd="skills">skills</button>
+          <button data-cmd="contact">contact</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section>
+    <div class="wrap reveal">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-number" data-target="500000" data-suffix="+">0</div>
+          <div class="stat-label">Élèves touchés (Massar)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="40" data-suffix="+">0</div>
+          <div class="stat-label">Fonctionnalités conçues (PFE)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="38" data-suffix="">0</div>
+          <div class="stat-label">Pages développées</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="20" data-suffix="">0</div>
+          <div class="stat-label">Endpoints API conçus</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <p class="eyebrow reveal">à propos</p>
+      <h2 class="section-title reveal">Du cahier des charges à la mise en production</h2>
+      <div class="about-grid">
+        <div class="reveal">
+          <p>Je suis ingénieure logicielle full-stack, formée à l'Université Ibn Zohr (Master d'Excellence en Ingénierie Logicielle) après un DUT en Génie Logiciel à l'EST de Salé. J'aime prendre un besoin métier flou et le transformer en une application propre, testée et déployée.</p>
+          <p>Pendant mon stage de fin d'études chez Digiteam Archytas Conseil, j'ai mené le benchmark concurrentiel, conçu le module fonctionnel et développé 5 modules en React.js / Node.js / Supabase, déployés en continu sur Vercel — avec une vraie démarche de recette (25 scénarios de test, 4 anomalies corrigées avant mise en production).</p>
+          <p>Autonome, curieuse et à l'aise en environnement agile pluridisciplinaire, je cherche aujourd'hui un poste en développement web (Front-end / Back-end / Full-Stack) pour continuer à livrer des produits utilisés par de vrais utilisateurs.</p>
+        </div>
+        <ul class="facts">
+          <li><span>Localisation</span><span>Salé, Maroc</span></li>
+          <li><span>Recherche</span><span>Poste Full-Stack</span></li>
+          <li><span>Télétravail</span><span>Ouverte</span></li>
+          <li><span>Langues</span><span>AR · FR (B1) · EN (B1)</span></li>
+          <li><span>Disponibilité</span><span>Immédiate</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <p class="eyebrow reveal">parcours</p>
+      <h2 class="section-title reveal">Expérience professionnelle</h2>
+
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <p class="tl-period">Février 2026 — Juillet 2026</p>
+          <h3 class="tl-role">Conceptrice &amp; Développeuse Web Full-Stack — Stage PFE</h3>
+          <p class="tl-org">Digiteam Archytas Conseil, Rabat — Plateforme de gestion des appels d'offres</p>
+          <ul>
+            <li>Benchmark de 4 solutions concurrentes et analyse des besoins fonctionnels, en autonomie</li>
+            <li>Conception fonctionnelle et technique du module appels d'offres — 40+ fonctionnalités, 4 rôles</li>
+            <li>Développement full-stack (React.js, Node.js, Supabase) de 5 modules et 38 pages, déploiement continu sur Vercel</li>
+            <li>Rédaction du cahier de recette et exécution de 25 scénarios de test — 4 anomalies corrigées avant production</li>
+          </ul>
+        </div>
+
+        <div class="tl-item reveal">
+          <p class="tl-period">Avril 2023 — Juin 2023</p>
+          <h3 class="tl-role">Développeuse Web Full-Stack — Stage PFE</h3>
+          <p class="tl-org">Laboratoire National des Ressources Numériques, Rabat</p>
+          <ul>
+            <li>Conception et développement de 12 jeux éducatifs en Amazigh (HTML, CSS, JavaScript)</li>
+            <li>Coordination avec l'équipe pédagogique, respect des délais imposés</li>
+            <li>Déploiement sur la plateforme nationale Massar — plus de 500&nbsp;000 élèves touchés à l'échelle du Maroc</li>
+          </ul>
+        </div>
+
+        <div class="tl-item reveal">
+          <p class="tl-period">Mai 2022 — Juin 2022</p>
+          <h3 class="tl-role">Stagiaire Génie Logiciel</h3>
+          <p class="tl-org">ETCEINFO, Rabat</p>
+          <ul>
+            <li>Apprentissage du langage Python et observation des processus IT en environnement professionnel</li>
+            <li>Adaptation rapide aux outils et méthodes de l'équipe</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <p class="eyebrow reveal">réalisations</p>
+      <h2 class="section-title reveal">Projets</h2>
+
+      <div class="filters reveal">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="react">React / Node</button>
+        <button class="filter-btn" data-filter="dotnet">.NET</button>
+        <button class="filter-btn" data-filter="php">PHP</button>
+        <button class="filter-btn" data-filter="java">Java</button>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- PFE case study - no real UI screenshots (confidential) -->
+        <div class="project-card reveal" data-tags="react">
+          <div class="project-visual">
+            <span class="project-badge">Étude de cas · confidentiel</span>
+            <svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet">
+              <rect x="20" y="55" width="90" height="40" rx="6" fill="#16253D" stroke="#3457D1" stroke-width="1.5"/>
+              <text x="65" y="79" text-anchor="middle" fill="#EAEFF7" font-family="JetBrains Mono" font-size="9">React.js</text>
+              <rect x="155" y="55" width="90" height="40" rx="6" fill="#16253D" stroke="#48D3C4" stroke-width="1.5"/>
+              <text x="200" y="79" text-anchor="middle" fill="#EAEFF7" font-family="JetBrains Mono" font-size="9">Node.js API</text>
+              <rect x="290" y="55" width="90" height="40" rx="6" fill="#16253D" stroke="#E0AA45" stroke-width="1.5"/>
+              <text x="335" y="73" text-anchor="middle" fill="#EAEFF7" font-family="JetBrains Mono" font-size="8">Supabase</text>
+              <text x="335" y="85" text-anchor="middle" fill="#8CA0C4" font-family="JetBrains Mono" font-size="7">PostgreSQL</text>
+              <line x1="110" y1="75" x2="155" y2="75" stroke="#3457D1" stroke-width="1.5" marker-end="url(#arrow)"/>
+              <line x1="245" y1="75" x2="290" y2="75" stroke="#48D3C4" stroke-width="1.5" marker-end="url(#arrow)"/>
+              <g font-family="JetBrains Mono" font-size="7" fill="#5E7096">
+                <rect x="10" y="15" width="72" height="18" rx="9" fill="#0F1B30" stroke="#223255"/>
+                <text x="46" y="27" text-anchor="middle">Admin</text>
+                <rect x="90" y="15" width="100" height="18" rx="9" fill="#0F1B30" stroke="#223255"/>
+                <text x="140" y="27" text-anchor="middle">Chef de projet</text>
+                <rect x="198" y="15" width="94" height="18" rx="9" fill="#0F1B30" stroke="#223255"/>
+                <text x="245" y="27" text-anchor="middle">Commercial</text>
+                <rect x="300" y="15" width="98" height="18" rx="9" fill="#0F1B30" stroke="#223255"/>
+                <text x="349" y="27" text-anchor="middle">Approvisionneur</text>
+              </g>
+              <defs>
+                <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#48D3C4"/>
+                </marker>
+              </defs>
+            </svg>
+          </div>
+          <div class="project-body">
+            <h3>Plateforme de gestion des appels d'offres</h3>
+            <p>Conçue et développée pendant mon PFE. Interfaces non diffusables (projet client confidentiel) — schéma d'architecture ci-dessus reconstitué à titre illustratif.</p>
+            <div class="tag-row">
+              <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Supabase</span><span class="tag">Vercel</span>
+            </div>
+            <div class="project-links"><span class="mono" style="color:var(--text-dim); font-size:.78rem;">Stage PFE — Digiteam Archytas Conseil</span></div>
+          </div>
+        </div>
+
+        <!-- Location touristique -->
+        <div class="project-card reveal" data-tags="dotnet react">
+          <div class="project-visual">
+            <svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet">
+              <rect x="30" y="30" width="70" height="26" rx="6" fill="#16253D" stroke="#3457D1"/>
+              <text x="65" y="47" text-anchor="middle" fill="#EAEFF7" font-family="JetBrains Mono" font-size="8">Réservations</text>
+              <rect x="30" y="70" width="70" height="26" rx="6" fill="#16253D" stroke="#3457D1"/>
+              <text x="65" y="87" text-anchor="middle" fill="#EAEFF7" font-family="JetBrains Mono" font-size="8">Logements</text>
+              <rect x="150" y="30" width="70" height="26" rx="6" fill="#16253D" stroke="#48D3C4"/>
+              <text x="185" y="47" text-anchor="middle" fill="#EAEFF7" font-family="JetBrains Mono" font-size="8">Paiements</text>
+              <rect x="150" y="70" width="70" height="26" rx="6" fill="#16253D" stroke="#48D3C4"/>
+              <text x="185" y="87" text-anchor="middle" fill="#EAEFF7" font-family="JetBrains Mono" font-size="8">Utilisateurs</text>
+              <rect x="280" y="50" width="90" height="30" rx="6" fill="#16253D" stroke="#E0AA45"/>
+              <text x="325" y="69" text-anchor="middle" fill="#EAEFF7" font-family="JetBrains Mono" font-size="8">API REST</text>
+              <line x1="100" y1="43" x2="280" y2="60" stroke="#3457D1" stroke-width="1.2"/>
+              <line x1="100" y1="83" x2="280" y2="68" stroke="#3457D1" stroke-width="1.2"/>
+              <line x1="220" y1="43" x2="280" y2="60" stroke="#48D3C4" stroke-width="1.2"/>
+              <line x1="220" y1="83" x2="280" y2="68" stroke="#48D3C4" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <h3>Plateforme de location touristique</h3>
+            <p>Architecture microservices (Réservations, Logements, Paiements, Utilisateurs). API REST conteneurisée via Docker, pipeline CI/CD, tests via Swagger.</p>
+            <div class="tag-row">
+              <span class="tag">.NET (C#)</span><span class="tag">React.js</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span>
+            </div>
+            <div class="project-links"><a href="https://github.com/elattarynoha" target="_blank" rel="noopener">Voir sur GitHub →</a></div>
+          </div>
+        </div>
+
+        <!-- E-commerce -->
+        <div class="project-card reveal" data-tags="php">
+          <div class="project-visual">
+            <svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet">
+              <rect x="40" y="20" width="150" height="105" rx="8" fill="#16253D" stroke="#223255"/>
+              <rect x="52" y="32" width="126" height="10" rx="2" fill="#3457D1" opacity=".5"/>
+              <rect x="52" y="50" width="60" height="60" rx="4" fill="#0F1B30" stroke="#48D3C4" opacity=".7"/>
+              <rect x="120" y="50" width="58" height="14" rx="2" fill="#223255"/>
+              <rect x="120" y="70" width="58" height="14" rx="2" fill="#223255"/>
+              <rect x="120" y="90" width="58" height="14" rx="2" fill="#E0AA45" opacity=".7"/>
+              <rect x="210" y="20" width="150" height="105" rx="8" fill="#16253D" stroke="#223255"/>
+              <rect x="222" y="32" width="60" height="10" rx="2" fill="#48D3C4" opacity=".6"/>
+              <rect x="222" y="52" width="126" height="12" rx="2" fill="#223255"/>
+              <rect x="222" y="70" width="126" height="12" rx="2" fill="#223255"/>
+              <rect x="222" y="88" width="126" height="12" rx="2" fill="#223255"/>
+              <text x="115" y="140" text-anchor="middle" fill="#5E7096" font-family="JetBrains Mono" font-size="8">Espace client</text>
+              <text x="285" y="140" text-anchor="middle" fill="#5E7096" font-family="JetBrains Mono" font-size="8">Espace admin</text>
+            </svg>
+          </div>
+          <div class="project-body">
+            <h3>Plateforme e-commerce — produits cosmétiques</h3>
+            <p>Espace client complet (achat, panier, commande, paiement, facturation) et espace administrateur (produits, utilisateurs, commandes).</p>
+            <div class="tag-row">
+              <span class="tag">PHP</span><span class="tag">HTML/CSS</span><span class="tag">Bootstrap</span>
+            </div>
+            <div class="project-links"><a href="https://github.com/elattarynoha" target="_blank" rel="noopener">Voir sur GitHub →</a></div>
+          </div>
+        </div>
+
+        <!-- Gestion evenements -->
+        <div class="project-card reveal" data-tags="java">
+          <div class="project-visual">
+            <svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet">
+              <circle cx="90" cy="75" r="45" fill="none" stroke="#3457D1" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <circle cx="90" cy="75" r="6" fill="#3457D1"/>
+              <circle cx="200" cy="45" r="6" fill="#48D3C4"/>
+              <circle cx="230" cy="90" r="6" fill="#48D3C4"/>
+              <circle cx="170" cy="100" r="6" fill="#48D3C4"/>
+              <line x1="90" y1="75" x2="200" y2="45" stroke="#223255"/>
+              <line x1="90" y1="75" x2="230" y2="90" stroke="#223255"/>
+              <line x1="90" y1="75" x2="170" y2="100" stroke="#223255"/>
+              <text x="90" y="79" text-anchor="middle" fill="#0A1220" font-family="JetBrains Mono" font-size="7" font-weight="700">Event</text>
+              <text x="300" y="70" fill="#5E7096" font-family="JetBrains Mono" font-size="8">Participants</text>
+              <text x="300" y="85" fill="#5E7096" font-family="JetBrains Mono" font-size="8">MVC · JSF</text>
+            </svg>
+          </div>
+          <div class="project-body">
+            <h3>Application de gestion d'événements</h3>
+            <p>Création, réservation et gestion des participants. Espaces administrateur et client dédiés, architecture MVC avec Jakarta EE.</p>
+            <div class="tag-row">
+              <span class="tag">Jakarta EE</span><span class="tag">JSF</span><span class="tag">MySQL</span><span class="tag">Wildfly</span>
+            </div>
+            <div class="project-links"><a href="https://github.com/elattarynoha" target="_blank" rel="noopener">Voir sur GitHub →</a></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <p class="eyebrow reveal">boîte à outils</p>
+      <h2 class="section-title reveal">Compétences techniques</h2>
+      <div class="skills-grid">
+        <div class="skill-cat reveal">
+          <h4>Frontend</h4>
+          <div class="chip-row">
+            <span class="chip">React.js</span><span class="chip">JavaScript (ES6+)</span><span class="chip">TypeScript</span><span class="chip">HTML5</span><span class="chip">CSS3</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h4>Backend</h4>
+          <div class="chip-row">
+            <span class="chip">Node.js</span><span class="chip">REST API</span><span class="chip">Java / Spring Boot</span><span class="chip">.NET (C#)</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h4>Bases de données</h4>
+          <div class="chip-row">
+            <span class="chip">PostgreSQL</span><span class="chip">Supabase</span><span class="chip">MySQL</span><span class="chip">SQL Server</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h4>DevOps &amp; Outils</h4>
+          <div class="chip-row">
+            <span class="chip">Git / GitHub</span><span class="chip">Docker</span><span class="chip">Vercel</span><span class="chip">CI/CD</span><span class="chip">Swagger</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h4>Tests &amp; qualité</h4>
+          <div class="chip-row">
+            <span class="chip">Tests unitaires</span><span class="chip">Tests fonctionnels</span><span class="chip">Tests d'intégration</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h4>Méthodologies</h4>
+          <div class="chip-row">
+            <span class="chip">Agile / Scrum</span><span class="chip">UML</span><span class="chip">Kanban</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMATION / CERTIFS -->
+  <section>
+    <div class="wrap two-col">
+      <div>
+        <p class="eyebrow reveal">formation</p>
+        <h2 class="section-title reveal" style="margin-bottom:20px;">Parcours académique</h2>
+        <ul class="simple-list reveal">
+          <li><div class="item-title">Master d'Excellence — Ingénierie Logicielle</div><div class="item-sub">Université Ibn Zohr, Agadir · 2024 – 2026</div></li>
+          <li><div class="item-title">Licence d'Excellence — Ingénierie Logicielle</div><div class="item-sub">Université Ibn Zohr, Agadir · 2023 – 2024</div></li>
+          <li><div class="item-title">DUT — Génie Logiciel</div><div class="item-sub">Université Mohammed V, EST Salé · 2021 – 2023</div></li>
+          <li><div class="item-title">Baccalauréat — Sciences physiques</div><div class="item-sub">Salé · 2020 – 2021</div></li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow reveal">certifications</p>
+        <h2 class="section-title reveal" style="margin-bottom:20px;">Certifications &amp; activités</h2>
+        <ul class="simple-list reveal">
+          <li><div class="item-title">Agile Product Management</div><div class="item-sub">Alison</div></li>
+          <li><div class="item-title">Scrum Master Training</div><div class="item-sub">Alison</div></li>
+          <li><div class="item-title">Introduction to Cybersecurity</div><div class="item-sub">Cisco Networking Academy</div></li>
+          <li><div class="item-title">Vice-Présidente, Comité Partenariat</div><div class="item-sub">Digital Transformation and Innovation Club</div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <p class="eyebrow reveal" style="justify-content:center;">contact</p>
+    <h2 class="reveal">Travaillons ensemble</h2>
+    <p class="lead reveal">Ouverte à un poste full-stack à Rabat-Salé-Kénitra ou en télétravail. Réponse rapide garantie.</p>
+    <div class="contact-row reveal">
+      <button class="btn btn-primary" id="copyEmailBtn">elattarynohaila@gmail.com</button>
+      <a href="tel:+212672547846" class="btn btn-ghost">+212 6 72 54 78 46</a>
+    </div>
+    <div class="foot-links">
+      <a href="https://github.com/elattarynoha" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/nohaila-el-attary" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://elattarynoha.github.io" target="_blank" rel="noopener">Portfolio</a>
+    </div>
+    <p class="copyright">© 2026 — Nohaila El-Attary · Salé, Maroc</p>
+  </div>
+</footer>
+
+<div class="copy-toast" id="copyToast">Email copié ✓</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- Nav mobile toggle ---- */
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ navLinks.classList.remove('open'); });
+  });
+
+  /* ---- Scroll reveal ---- */
+  var revealEls = document.querySelectorAll('.reveal, .chip');
+  var revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var delay = entry.target.classList.contains('chip') ? Math.random()*250 : 0;
+        setTimeout(function(){ entry.target.classList.add('in-view'); }, delay);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold:.15 });
+  revealEls.forEach(function(el){ revealObserver.observe(el); });
+
+  /* ---- Animated stat counters ---- */
+  var statEls = document.querySelectorAll('.stat-number');
+  var statObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(!entry.isIntersecting) return;
+      var el = entry.target;
+      var target = parseInt(el.getAttribute('data-target'), 10);
+      var suffix = el.getAttribute('data-suffix') || '';
+      var duration = 1600;
+      var start = null;
+      function step(ts){
+        if(!start) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var value = Math.floor(eased * target);
+        el.textContent = value.toLocaleString('fr-FR') + suffix;
+        if(progress < 1) requestAnimationFrame(step);
+        else el.textContent = target.toLocaleString('fr-FR') + suffix;
+      }
+      requestAnimationFrame(step);
+      statObserver.unobserve(el);
+    });
+  }, { threshold:.5 });
+  statEls.forEach(function(el){ statObserver.observe(el); });
+
+  /* ---- Project filtering ---- */
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  var projectCards = document.querySelectorAll('.project-card');
+  filterBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      filterBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.getAttribute('data-filter');
+      projectCards.forEach(function(card){
+        var tags = card.getAttribute('data-tags');
+        var show = (filter === 'all') || tags.indexOf(filter) !== -1;
+        card.classList.toggle('hidden', !show);
+      });
+    });
+  });
+
+  /* ---- Copy email ---- */
+  var copyBtn = document.getElementById('copyEmailBtn');
+  var toast = document.getElementById('copyToast');
+  copyBtn.addEventListener('click', function(){
+    var email = 'elattarynohaila@gmail.com';
+    function showToast(){
+      toast.classList.add('show');
+      setTimeout(function(){ toast.classList.remove('show'); }, 2000);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(email).then(showToast).catch(function(){
+        window.location.href = 'mailto:' + email;
+      });
+    } else {
+      window.location.href = 'mailto:' + email;
+    }
+  });
+
+  /* ---- Interactive terminal ---- */
+  var termBody = document.getElementById('terminalBody');
+  var termInput = document.getElementById('terminalInput');
+  var chips = document.querySelectorAll('.terminal-chips button');
+
+  var commands = {
+    help: [
+      "Commandes disponibles :",
+      "  whoami       — courte présentation",
+      "  experience   — parcours professionnel",
+      "  projets      — liste des projets",
+      "  skills       — stack technique",
+      "  contact      — coordonnées",
+      "  clear        — vider le terminal"
+    ],
+    whoami: [
+      "Nohaila El-Attary — Ingénieure Logicielle Full-Stack",
+      "Master Ingénierie Logicielle · Université Ibn Zohr",
+      "Spécialités : React.js, Node.js, .NET (C#), Supabase",
+      "Un projet déployé touche aujourd'hui 500 000+ élèves au Maroc."
+    ],
+    experience: [
+      "[2026] Digiteam Archytas Conseil — Stage PFE Full-Stack",
+      "[2023] Laboratoire National des Ressources Numériques — Jeux éducatifs Amazigh (Massar)",
+      "[2022] ETCEINFO — Stage d'initiation Génie Logiciel",
+      "→ voir la section 'Expérience professionnelle' ci-dessous"
+    ],
+    projets: [
+      "1. Plateforme de gestion des appels d'offres (PFE)",
+      "2. Plateforme de location touristique — .NET / React / Docker",
+      "3. Plateforme e-commerce — PHP / Bootstrap",
+      "4. Gestion d'événements — Jakarta EE / MySQL",
+      "→ voir la section 'Projets' ci-dessous"
+    ],
+    skills: [
+      "Frontend : React.js, JavaScript ES6+, TypeScript, HTML5, CSS3",
+      "Backend  : Node.js, REST API, Spring Boot, .NET (C#)",
+      "DB       : PostgreSQL, Supabase, MySQL, SQL Server",
+      "DevOps   : Git, Docker, Vercel, CI/CD, Swagger"
+    ],
+    contact: [
+      "Email    : elattarynohaila@gmail.com",
+      "Téléphone: +212 6 72 54 78 46",
+      "LinkedIn : linkedin.com/in/nohaila-el-attary",
+      "GitHub   : github.com/elattarynoha"
+    ]
+  };
+
+  function addLine(text, cls){
+    var div = document.createElement('div');
+    div.className = 'term-line' + (cls ? ' ' + cls : '');
+    div.textContent = text;
+    termBody.appendChild(div);
+    termBody.scrollTop = termBody.scrollHeight;
+  }
+
+  function addPromptLine(cmd){
+    var div = document.createElement('div');
+    div.className = 'term-line';
+    div.innerHTML = '<span class="prompt">$</span>' + cmd;
+    termBody.appendChild(div);
+    termBody.scrollTop = termBody.scrollHeight;
+  }
+
+  function runCommand(raw){
+    var cmd = raw.trim().toLowerCase();
+    if(!cmd) return;
+    addPromptLine(raw);
+    if(cmd === 'clear'){
+      termBody.innerHTML = '';
+      return;
+    }
+    var output = commands[cmd];
+    if(output){
+      output.forEach(function(line, i){
+        setTimeout(function(){ addLine(line, 'out'); }, i * 90);
+      });
+    } else {
+      addLine("command not found: " + cmd + " — tape 'help'", 'err');
+    }
+  }
+
+  chips.forEach(function(btn){
+    btn.addEventListener('click', function(){ runCommand(btn.getAttribute('data-cmd')); });
+  });
+
+  termInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){
+      runCommand(termInput.value);
+      termInput.value = '';
+    }
+  });
+
+  /* Typed intro on load */
+  var intro = "Bienvenue. Tapez 'help' pour explorer mon parcours.";
+  var i = 0;
+  var introLine = document.createElement('div');
+  introLine.className = 'term-line out';
+  introLine.innerHTML = '<span class="prompt">$</span><span id="typedSpan"></span>';
+  termBody.appendChild(introLine);
+  var typedSpan = document.getElementById('typedSpan');
+  function typeChar(){
+    if(i < intro.length){
+      typedSpan.textContent += intro.charAt(i);
+      i++;
+      setTimeout(typeChar, 28);
+    }
+  }
+  typeChar();
+
+})();
+</script>
+</body>
+</html>
