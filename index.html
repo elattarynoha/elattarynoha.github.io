@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nohaila El-Attary — Ingénieure Logicielle Full-Stack</title>
-<meta name="description" content="Portfolio de Nohaila El-Attary, Ingénieure Logicielle Full-Stack — React.js, Node.js, .NET. Plateforme éducative touchant plus de 500 000 élèves au Maroc.">
+<title>Nohaila El-Attary — Ingénieure Logicielle &amp; Testeuse QA</title>
+<meta name="description" content="Portfolio de Nohaila El-Attary, Ingénieure Logicielle &amp; Testeuse QA — développement full-stack (React.js, Node.js, Spring Boot) et démarche qualité complète (Cypress, Selenium, Postman, Jira).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#184289;
-    --bg-alt:#123168;
+    --bg:#0D1B36;
+    --bg-alt:#0A1530;
     --card:#12213A;
     --card-hover:#162a49;
     --border:#223255;
@@ -278,6 +278,18 @@
   .chip.in-view{opacity:1; transform:scale(1);}
   .chip:hover{border-color:var(--teal);}
 
+  /* ---------- QA / TESTS ---------- */
+  .qa-process{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:32px;}
+  @media (max-width:900px){ .qa-process{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .qa-process{grid-template-columns:1fr;} }
+  .qa-step{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px;}
+  .qa-step .qa-step-num{font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--teal); margin-bottom:8px;}
+  .qa-step h4{font-size:.95rem; margin-bottom:6px;}
+  .qa-step p{color:var(--text-muted); font-size:.82rem;}
+  .qa-tool{position:relative;}
+  .qa-tool .chip.learning{border-color:var(--gold); color:var(--gold);}
+  .qa-tool .chip.learning::after{content:" · en cours"; color:var(--text-dim); font-size:.7rem;}
+
   /* ---------- TWO COL: formation / certifs ---------- */
   .two-col{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
   @media (max-width:800px){ .two-col{grid-template-columns:1fr;} }
@@ -315,6 +327,7 @@
       <li><a href="#experience">Expérience</a></li>
       <li><a href="#projects">Projets</a></li>
       <li><a href="#skills">Compétences</a></li>
+      <li><a href="#qa-testing">Tests QA</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">☰</button>
@@ -326,10 +339,10 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <p class="eyebrow">ingénieure logicielle · full-stack</p>
+        <p class="eyebrow">ingénieure logicielle · test &amp; assurance qualité</p>
         <h1>Nohaila <span>El-Attary</span></h1>
-        <p class="role">React.js · Node.js · .NET (C#) · Supabase</p>
-        <p class="lead">Jeune diplômée en Ingénierie Logicielle, je conçois et développe des applications web de bout en bout — de l'analyse fonctionnelle au déploiement. Mon stage de fin d'études a porté sur une plateforme de gestion des appels d'offres utilisée en production ; mon premier projet, une série de jeux éducatifs, a été déployé sur la plateforme nationale Massar et touche plus de 1&nbsp;000 élèves au Maroc.Motivée  et passionée par l'apprentissage des nouvelles compétences.</p>
+        <p class="role">Développement Full-Stack · Test &amp; Automatisation QA</p>
+        <p class="lead">Jeune diplômée en Ingénierie Logicielle, je conçois des applications web de bout en bout et j'en pilote la démarche qualité — de l'analyse des exigences à la détection et au suivi des anomalies. Sur mon projet TaskFlow (Spring Boot / Angular), j'ai mis en place une stratégie de test complète : 30 cas de test, validation d'API via Postman, suivi des anomalies sur Jira, et des rôles dédiés Testeur QA / QA Senior au sein même de l'application.</p>
         <div class="cta-row">
           <a href="mailto:elattarynohaila@gmail.com" class="btn btn-primary">Me contacter</a>
           <a href="https://github.com/elattarynoha" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
@@ -352,6 +365,7 @@
           <button data-cmd="experience">experience</button>
           <button data-cmd="projets">projets</button>
           <button data-cmd="skills">skills</button>
+          <button data-cmd="tests">tests</button>
           <button data-cmd="contact">contact</button>
         </div>
       </div>
@@ -389,13 +403,13 @@
       <h2 class="section-title reveal">Du cahier des charges à la mise en production</h2>
       <div class="about-grid">
         <div class="reveal">
-          <p>Je suis ingénieure logicielle full-stack, formée à l'Université Ibn Zohr (Master d'Excellence en Ingénierie Logicielle) après un DUT en Génie Logiciel à l'EST de Salé. J'aime prendre un besoin métier flou et le transformer en une application propre, testée et déployée.</p>
-          <p>Pendant mon stage de fin d'études chez Digiteam Archytas Conseil, j'ai mené le benchmark concurrentiel, conçu le module fonctionnel et développé 5 modules en React.js / Node.js / Supabase, déployés en continu sur Vercel — avec une vraie démarche de recette (25 scénarios de test, 4 anomalies corrigées avant mise en production).</p>
-          <p>Autonome, curieuse et à l'aise en environnement agile pluridisciplinaire, je cherche aujourd'hui un poste en développement web (Front-end / Back-end / Full-Stack) pour continuer à livrer des produits utilisés par de vrais utilisateurs.</p>
+          <p>Je suis ingénieure logicielle, formée à l'Université Ibn Zohr (Master d'Excellence en Ingénierie Logicielle) après un DUT en Génie Logiciel à l'EST de Salé. J'aime prendre un besoin métier flou et le transformer en une application propre, testée et fiable.</p>
+          <p>Mon profil est double : je développe (React.js, Node.js, Spring Boot, Angular) et je conduis la démarche qualité qui va avec — analyse des exigences, conception de scénarios de test, exécution fonctionnelle, suivi des anomalies. Sur TaskFlow, mon projet Spring Boot / Angular, j'ai formalisé une stratégie de test de 30 cas, validé les API via Postman, suivi les anomalies sur Jira, et mis en place des rôles Testeur QA et QA Senior dédiés à l'analyse.</p>
+          <p>Autonome, curieuse et à l'aise en environnement agile pluridisciplinaire, je recherche aujourd'hui un poste d'Ingénieure Test / QA junior, pour mettre cette double compétence au service d'une équipe produit.</p>
         </div>
         <ul class="facts">
           <li><span>Localisation</span><span>Salé, Maroc</span></li>
-          <li><span>Recherche</span><span>Poste Full-Stack- Backend - Frontend - Test -Conceptrice</span></li>
+          <li><span>Recherche</span><span>Ingénieure Test / QA junior</span></li>
           <li><span>Télétravail</span><span>Ouverte</span></li>
           <li><span>Langues</span><span>AR · FR  · EN </span></li>
           <li><span>Disponibilité</span><span>Immédiate</span></li>
@@ -413,42 +427,32 @@
       <div class="timeline">
         <div class="tl-item reveal">
           <p class="tl-period">Février 2026 — Juillet 2026</p>
-          <h3 class="tl-role">Conceptrice &amp; Développeuse Web Full-Stack — Stage PFE</h3>
-          <p class="tl-org">Digiteam Archytas Conseil, Rabat — Plateforme de gestion des appels d'offres</p>
+          <h3 class="tl-role">Conception &amp; Tests Fonctionnels QA — Stage PFE</h3>
+          <p class="tl-org">Stage de fin d'études, Rabat</p>
           <ul>
-            <li>Benchmark de 4 solutions concurrentes et analyse des besoins fonctionnels, en autonomie</li>
-            <li>Conception fonctionnelle et technique du module appels d'offres — 40+ fonctionnalités, 4 rôles</li>
-            <li>Développement full-stack (React.js, Node.js, Supabase) de 5 modules et 38 pages, déploiement continu sur Vercel</li>
-            <li>Rédaction du cahier de recette et exécution de 25 scénarios de test — 4 anomalies corrigées avant production</li>
+            <li>Analyse des besoins clients et rédaction du cahier des charges</li>
+            <li>Conception des exigences fonctionnelles — 40+ fonctionnalités, 4 rôles utilisateurs</li>
+            <li>Tests fonctionnels manuels sur les interfaces développées, pour identifier les anomalies à corriger</li>
           </ul>
         </div>
 
         <div class="tl-item reveal">
           <p class="tl-period">Avril 2023 — Juin 2023</p>
-          <h3 class="tl-role">Développeuse Web Full-Stack — Stage PFE</h3>
+          <h3 class="tl-role">Développeuse Web Full-Stack — Stage</h3>
           <p class="tl-org">Laboratoire National des Ressources Numériques, Rabat</p>
-          <ul>
-            <li>Conception et développement de 12 jeux éducatifs en Amazigh (HTML, CSS, JavaScript)</li>
-            <li>Coordination avec l'équipe pédagogique, respect des délais imposés</li>
-            <li>Déploiement sur la plateforme nationale Massar — plus de 500&nbsp;000 élèves touchés à l'échelle du Maroc</li>
-          </ul>
         </div>
 
         <div class="tl-item reveal">
           <p class="tl-period">Mai 2022 — Juin 2022</p>
-          <h3 class="tl-role">Stagiaire Génie Logiciel</h3>
+          <h3 class="tl-role">Stagiaire Génie Logiciel — Stage</h3>
           <p class="tl-org">ETCEINFO, Rabat</p>
-          <ul>
-            <li>Apprentissage du langage Python et observation des processus IT en environnement professionnel</li>
-            <li>Adaptation rapide aux outils et méthodes de l'équipe</li>
-          </ul>
         </div>
       </div>
     </div>
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects">
+  <section id="projects clés">
     <div class="wrap">
       <p class="eyebrow reveal">réalisations</p>
       <h2 class="section-title reveal">Projets</h2>
@@ -459,8 +463,8 @@
         <button class="filter-btn" data-filter="dotnet">.NET</button>
         <button class="filter-btn" data-filter="php">PHP</button>
         <button class="filter-btn" data-filter="java">Java</button>
-                <button class="filter-btn" data-filter="angular">Spring/Angular</button>
-
+        <button class="filter-btn" data-filter="angular">Spring/Angular</button>
+        <button class="filter-btn" data-filter="qa">Test / QA</button>
       </div>
 
       <div class="projects-grid">
@@ -502,7 +506,7 @@
             <div class="tag-row">
               <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Supabase</span><span class="tag">Vercel</span>
             </div>
-            <div class="project-links"><span class="mono" style="color:var(--text-dim); font-size:.78rem;">Stage PFE — Digiteam Archytas Conseil</span></div>
+            <div class="project-links"><span class="mono" style="color:var(--text-dim); font-size:.78rem;">Stage PFE — projet client confidentiel</span></div>
           </div>
         </div>
 
@@ -564,8 +568,9 @@
             <div class="project-links"><a href="https://github.com/elattarynoha/Cosmetics-Product" target="_blank" rel="noopener">Voir sur GitHub →</a></div>
           </div>
         </div>
-        <div class="project-card reveal" data-tags="angular">
+        <div class="project-card reveal" data-tags="angular qa">
           <div class="project-visual">
+            <span class="project-badge">Dev + QA intégré</span>
             <svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid meet">
               <rect x="40" y="20" width="150" height="105" rx="8" fill="#16253D" stroke="#223255"/>
               <rect x="52" y="32" width="126" height="10" rx="2" fill="#3457D1" opacity=".5"/>
@@ -578,15 +583,15 @@
               <rect x="222" y="52" width="126" height="12" rx="2" fill="#223255"/>
               <rect x="222" y="70" width="126" height="12" rx="2" fill="#223255"/>
               <rect x="222" y="88" width="126" height="12" rx="2" fill="#223255"/>
-              <text x="115" y="140" text-anchor="middle" fill="#5E7096" font-family="JetBrains Mono" font-size="8">Espace client</text>
-              <text x="285" y="140" text-anchor="middle" fill="#5E7096" font-family="JetBrains Mono" font-size="8">Espace admin</text>
+              <text x="115" y="140" text-anchor="middle" fill="#5E7096" font-family="JetBrains Mono" font-size="8">Rôle : Testeur QA</text>
+              <text x="285" y="140" text-anchor="middle" fill="#5E7096" font-family="JetBrains Mono" font-size="8">Rôle : QA Senior</text>
             </svg>
           </div>
         <div class="project-body">
-            <h3>Plateforme de gestion de projet avec tableau kanban</h3>
-            <p>Application web pour la gestion des projets,Authentification JWT complète et fonctionnelle, avec gestion propre des erreurs, CRUD complet avec vraies règles de propriété (ownership checks), Validation des données + gestion d'exceptions globale (@RestControllerAdvice), Un frontend Angular avec routing, guards, intercepteurs HTTP, et un Kanban drag-and-drop, Pagination/tri des taches des projets</p>
+            <h3>TaskFlow — Gestion de projet &amp; assurance qualité</h3>
+            <p>Application de gestion de projet en Kanban (Spring Boot / Angular), avec authentification JWT, CRUD complet et règles de propriété. J'y ai intégré des rôles Testeur QA et QA Senior (analyse), et conduit toute la démarche qualité : 30 cas de test formalisés (16 exécutés par priorité), validation des API via Postman, suivi des anomalies sur Jira — 6 anomalies corrigées, 0 régression sur 22 tests rejoués. Automatisation Cypress et SonarQube en préparation.</p>
             <div class="tag-row">
-              <span class="tag">Spring Boot (Spring MVC, Spring Data, Spring Security, JPA), </span><span class="tag">Angular</span><span class="tag">PostgreSQL</span><span class="tag">Postman</span><span class="tag">API Rest</span>
+              <span class="tag">Spring Boot</span><span class="tag">Angular</span><span class="tag">PostgreSQL</span><span class="tag">Postman</span><span class="tag">Jira</span><span class="tag">API Rest</span>
             </div>
             <div class="project-links"><a href="https://github.com/elattarynoha/TASKFLOW-API" target="_blank" rel="noopener">Voir sur GitHub →</a></div>
           </div>
@@ -696,6 +701,90 @@
     </div>
   </section>
 
+  <!-- QA / TESTS -->
+  <section id="qa-testing">
+    <div class="wrap">
+      <p class="eyebrow reveal">assurance qualité</p>
+      <h2 class="section-title reveal">Tests &amp; assurance qualité</h2>
+
+      <div class="stats reveal" style="margin-bottom:40px;">
+        <div class="stat">
+          <div class="stat-number" data-target="30" data-suffix="">0</div>
+          <div class="stat-label">Cas de test conçus (TaskFlow)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="16" data-suffix="">0</div>
+          <div class="stat-label">Exécutés par priorité</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="6" data-suffix="">0</div>
+          <div class="stat-label">Anomalies corrigées</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="22" data-suffix="">0</div>
+          <div class="stat-label">Tests rejoués, 0 régression</div>
+        </div>
+      </div>
+
+      <div class="qa-step reveal" style="margin-bottom:32px; background:linear-gradient(135deg, rgba(52,87,209,.12), rgba(72,211,196,.06));">
+        <div class="qa-step-num">Étude de cas — TaskFlow</div>
+        <h4>Un profil dev + QA sur le même projet</h4>
+        <p>Sur TaskFlow, je ne me suis pas contentée de développer : j'ai aussi conçu la stratégie de test (30 cas, 16 exécutés selon la priorité), validé les API avec Postman, suivi les anomalies sur Jira, et intégré au projet lui-même des rôles Testeur QA et QA Senior chargé de l'analyse — pour vivre les deux côtés du cycle de qualité logicielle.</p>
+      </div>
+
+      <div class="qa-process reveal">
+        <div class="qa-step">
+          <div class="qa-step-num">Analyse</div>
+          <h4>Exigences</h4>
+          <p>Lecture du besoin fonctionnel et identification des cas à couvrir, avant toute rédaction de test.</p>
+        </div>
+        <div class="qa-step">
+          <div class="qa-step-num">Conception</div>
+          <h4>Scénarios de test</h4>
+          <p>Rédaction de cahiers de recette et de test — 25 scénarios formalisés lors de mon dernier stage.</p>
+        </div>
+        <div class="qa-step">
+          <div class="qa-step-num">Exécution</div>
+          <h4>Tests manuels</h4>
+          <p>Exécution fonctionnelle, régression et non-régression, tests d'intégration et validation d'API.</p>
+        </div>
+        <div class="qa-step">
+          <div class="qa-step-num">Suivi</div>
+          <h4>Anomalies</h4>
+          <p>Remontée et suivi des anomalies jusqu'à correction complète, en lien avec l'équipe de développement.</p>
+        </div>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-cat reveal">
+          <h4>Types de tests</h4>
+          <div class="chip-row">
+            <span class="chip">Fonctionnels</span><span class="chip">Intégration</span><span class="chip">Non-régression</span><span class="chip">Régression</span><span class="chip">Unitaires</span><span class="chip">API</span><span class="chip">Validation</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal qa-tool">
+          <h4>Outils de test</h4>
+          <div class="chip-row">
+            <span class="chip">Postman</span><span class="chip">Swagger</span><span class="chip">Jira</span><span class="chip">JUnit</span><span class="chip">JTest</span><span class="chip">JMeter</span>
+            <span class="chip">Cypress — TestMu AI Cypress 101 ✓</span><span class="chip learning">Selenium</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h4>Livrables qualité</h4>
+          <div class="chip-row">
+            <span class="chip">Cahier de recette</span><span class="chip">Cahier de test</span><span class="chip">Fichier d'anomalies</span>
+          </div>
+        </div>
+        <div class="skill-cat reveal">
+          <h4>Méthodologie</h4>
+          <div class="chip-row">
+            <span class="chip">Agile / Scrum</span><span class="chip">Daily meetings</span><span class="chip">SDLC / STLC</span><span class="chip">UML</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FORMATION / CERTIFS -->
   <section>
     <div class="wrap two-col">
@@ -713,12 +802,15 @@
         <p class="eyebrow reveal">certifications / Badges et formations</p>
         <h2 class="section-title reveal" style="margin-bottom:20px;">Certifications &amp; activités</h2>
         <ul class="simple-list reveal">
-                    <li><div class="item-title">AWS Cloud Practitioner Essentials</div><div class="item-sub">AWS</div></li>
+                    <li><div class="item-title">TestMu AI Cypress 101 Professional</div><div class="item-sub">TestMu AI</div></li>
+          <li><div class="item-title">Fondamentaux du test logiciel &amp; assurance qualité (QA)</div><div class="item-sub">LinkedIn Learning</div></li>
+          <li><div class="item-title">AWS Cloud Practitioner Essentials</div><div class="item-sub">AWS</div></li>
           <li><div class="item-title">Agile SAFe</div><div class="item-sub">Simplilearn</div></li>
 
           <li><div class="item-title">Agile Product Management</div><div class="item-sub">Alison</div></li>
           <li><div class="item-title">Scrum Master Training</div><div class="item-sub">Alison</div></li>
           <li><div class="item-title">Introduction to Cybersecurity</div><div class="item-sub">Cisco Networking Academy</div></li>
+          <li><div class="item-title">Notions ISTQB — fondamentaux du test logiciel</div><div class="item-sub">Autoformation, certification non obtenue à ce jour</div></li>
           <li><div class="item-title">Vice-Présidente Comité Partenariat</div><div class="item-sub">Digital Transformation and Innovation Club</div></li>
         </ul>
       </div>
@@ -730,7 +822,7 @@
   <div class="wrap">
     <p class="eyebrow reveal" style="justify-content:center;">contact</p>
     <h2 class="reveal">Travaillons ensemble</h2>
-    <p class="lead reveal">Ouverte à un poste full-stack à Rabat-Salé-Kénitra ou en télétravail. Réponse rapide garantie.</p>
+    <p class="lead reveal">Ouverte à un poste d'Ingénieure Test / QA junior (full-stack apprécié) à Rabat-Salé-Kénitra ou en télétravail. Réponse rapide garantie.</p>
     <div class="contact-row reveal">
       <button class="btn btn-primary" id="copyEmailBtn">elattarynohaila@gmail.com</button>
       <a href="tel:+212672547846" class="btn btn-ghost">+212 6 72 54 78 46</a>
@@ -844,19 +936,20 @@
       "  experience   — parcours professionnel",
       "  projets      — liste des projets",
       "  skills       — stack technique",
+      "  tests        — démarche & outils QA",
       "  contact      — coordonnées",
       "  clear        — vider le terminal"
     ],
     whoami: [
-      "Nohaila El-Attary — Ingénieure Logicielle Full-Stack",
+      "Nohaila El-Attary — Ingénieure Logicielle & Testeuse QA",
       "Master Ingénierie Logicielle · Université Ibn Zohr",
-      "Spécialités : React.js, Node.js, .NET (C#), Supabase",
-      "Un projet déployé touche aujourd'hui 500 000+ élèves au Maroc."
+      "Double profil : développement full-stack ET démarche qualité",
+      "TaskFlow : 30 cas de test, 6 anomalies corrigées, 0 régression sur 22 tests rejoués."
     ],
     experience: [
-      "[2026] Digiteam Archytas Conseil — Stage PFE Full-Stack",
-      "[2023] Laboratoire National des Ressources Numériques — Jeux éducatifs Amazigh (Massar)",
-      "[2022] ETCEINFO — Stage d'initiation Génie Logiciel",
+      "[2026] Stage PFE — Conception & tests fonctionnels QA",
+      "[2023] Laboratoire National des Ressources Numériques — Développement Full-Stack",
+      "[2022] ETCEINFO — Stage Génie Logiciel",
       "→ voir la section 'Expérience professionnelle' ci-dessous"
     ],
     projets: [
@@ -871,6 +964,13 @@
       "Backend  : Node.js, REST API, Spring Boot, .NET (C#)",
       "DB       : PostgreSQL, Supabase, MySQL, SQL Server",
       "DevOps   : Git, Docker, Vercel, CI/CD, Swagger"
+    ],
+    tests: [
+      "Démarche : analyse des exigences → scénarios → exécution → suivi d'anomalies",
+      "Types    : fonctionnels, intégration, régression, non-régression, API, validation",
+      "Outils   : Postman, Swagger, Jira, JUnit, JTest, JMeter · Cypress & Selenium (en cours)",
+      "TaskFlow : 30 cas de test (16 exécutés par priorité), rôles Testeur QA / QA Senior",
+      "Résultats: 6 anomalies corrigées, 0 régression sur 22 tests rejoués (6/6 + 16/16)"
     ],
     contact: [
       "Email    : elattarynohaila@gmail.com",
@@ -945,5 +1045,4 @@
 })();
 </script>
 </body>
-/** ---- Google Analytics ---- */
 </html>
